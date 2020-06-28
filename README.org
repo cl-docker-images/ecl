@@ -1,0 +1,58 @@
+#+TITLE: ECL Docker Images
+#+AUTHOR: Eric Timmons
+
+* Supported Tags
+
+  + =20.4.24-alpine3.12=, =20.4.24-alpine=, =alpine3.12=, =alpine=
+  + =20.4.24-alpine3.11=, =alpine3.11=
+  + =20.4.24-debian-buster=, =20.4.24-debian=, =debian-buster=, =debian=, =latest=, =20.4.24=
+  + =20.4.24-debian-stretch=, =debian-stretch=
+  + =20.4.24-ubuntu-eoan=, =20.4.24-ubuntu=, =ubuntu-eoan=, =ubuntu=
+  + =20.4.24-ubuntu-bionic=, =ubuntu-bionic=
+
+* Quick Reference
+
+  + ECL Home Page :: [[https://common-lisp.net/project/ecl/]]
+  + Where to file Docker image related issues :: [[https://github.com/daewok/docker-ecl/]]
+  + Where to file issues for ECL itself :: [[https://gitlab.com/embeddable-common-lisp/ecl]]
+  + Maintained by :: [[https://github.com/daewok/docker-ecl/][Eric Timmons]] (i.e., this is not an official ECL image)
+  + Supported architectures :: =linux/amd64=, =linux/arm64=, =linux/arm/v7=
+
+* What is ECL?
+
+  From [[https://common-lisp.net/project/ecl/main.html][ECL's Home Page]]:
+
+  #+begin_quote
+  ECL (Embeddable Common-Lisp) is an interpreter of the Common-Lisp language as
+  described in the X3J13 Ansi specification, featuring CLOS (Common-Lisp Object
+  System), conditions, loops, etc, plus a translator to C, which can produce
+  standalone executables.
+
+  ECL supports the operating systems Linux, FreeBSD, NetBSD, OpenBSD, OS X,
+  Solaris, Windows, iOS and Android, running on top of the Intel, Sparc, Alpha,
+  PowerPC and ARM processors.
+  #+end_quote
+
+* What's in the image?
+
+  This image contains ECL binaries built from the latest source releases from
+  the ECL devs for a variety of OSes and architectures.
+
+  The general policy for OS support is that images will be built for two
+  versions of supported OSes: either the two most recent versions or the latest
+  LTS and most recent version, as applicable.
+
+* License
+
+  ECL is mostly licensed under the [[https://opensource.org/licenses/LGPL-2.0][GNU LGPL v2+]].
+
+  The Dockerfiles used to build the images are licensed under BSD-2-Clause.
+
+  As with all Docker images, these likely also contain other software which may
+  be under other licenses (such as Bash, etc from the base distribution, along
+  with any direct or indirect dependencies of the primary software being
+  contained).
+
+  As for any pre-built image usage, it is the image user's responsibility to
+  ensure that any use of this image complies with any relevant licenses for all
+  software contained within.
