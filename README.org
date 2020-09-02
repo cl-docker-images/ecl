@@ -7,7 +7,7 @@
   + =20.4.24-alpine3.11=, =alpine3.11=
   + =20.4.24-debian-buster=, =20.4.24-debian=, =debian-buster=, =debian=, =latest=, =20.4.24=
   + =20.4.24-debian-stretch=, =debian-stretch=
-  + =20.4.24-ubuntu-eoan=, =20.4.24-ubuntu=, =ubuntu-eoan=, =ubuntu=
+  + =20.4.24-ubuntu-focal=, =20.4.24-ubuntu=, =ubuntu-focal=, =ubuntu=
   + =20.4.24-ubuntu-bionic=, =ubuntu-bionic=
 
 * Quick Reference
