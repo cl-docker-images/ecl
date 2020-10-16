@@ -18,6 +18,7 @@
   + Where to file issues for ECL itself :: [[https://gitlab.com/embeddable-common-lisp/ecl]]
   + Maintained by :: [[https://github.com/daewok/][Eric Timmons]] and the [[https://mers.csail.mit.edu/][MIT MERS Group]] (i.e., this is not an official ECL image)
   + Supported architectures :: =linux/amd64=, =linux/arm64=, =linux/arm/v7=
+  + Previously known as :: =daewok/ecl=
 
 * What is ECL?
 
