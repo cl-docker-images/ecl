@@ -5,7 +5,7 @@ GitRepo: https://gitlab.common-lisp.net/cl-docker-images/ecl.git
 
 Tags: 20.4.24-alpine3.12, 20.4.24-alpine, alpine3.12, alpine
 Architectures: amd64, arm32v7, arm64v8
-amd64-Directory: 20.4.24/alpine/3.12/amd64
+amd64-Directory: 20.4.24/alpine3.12/amd64
 arm32v7-Directory: 20.4.24/alpine3.12/arm32v7
 arm64v8-Directory: 20.4.24/alpine3.12/arm64
 
@@ -13,7 +13,7 @@ arm64v8-Directory: 20.4.24/alpine3.12/arm64
 
 Tags: 20.4.24-alpine3.11, alpine3.11
 Architectures: amd64, arm32v7, arm64v8
-amd64-Directory: 20.4.24/alpine/3.11/amd64
+amd64-Directory: 20.4.24/alpine3.11/amd64
 arm32v7-Directory: 20.4.24/alpine3.11/arm32v7
 arm64v8-Directory: 20.4.24/alpine3.11/arm64
 
