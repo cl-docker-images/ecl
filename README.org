@@ -5,20 +5,16 @@
 
   + =20.4.24-alpine3.12=, =20.4.24-alpine=, =alpine3.12=, =alpine=
   + =20.4.24-alpine3.11=, =alpine3.11=
-  + =20.4.24-debian-buster=, =20.4.24-debian=, =debian-buster=, =debian=, =latest=, =20.4.24=
-  + =20.4.24-debian-stretch=, =debian-stretch=
-  + =20.4.24-ubuntu-focal=, =20.4.24-ubuntu=, =ubuntu-focal=, =ubuntu=
-  + =20.4.24-ubuntu-bionic=, =ubuntu-bionic=
+  + =20.4.24-buster=, =20.4.24=, =buster=, =latest=
+  + =20.4.24-stretch=, =stretch=
 
 * Quick Reference
 
   + ECL Home Page :: [[https://common-lisp.net/project/ecl/]]
-  + Where to file Docker image related issues :: [[https://gitlab.com/mit-mers/docker/ecl]]
-  + Where to file issues for build infrastructure :: [[https://gitlab.com/mit-mers/docker/library]]
+  + Where to file Docker image related issues :: [[https://gitlab.common-lisp.net/cl-docker-images/ecl]]
   + Where to file issues for ECL itself :: [[https://gitlab.com/embeddable-common-lisp/ecl]]
   + Maintained by :: [[https://github.com/daewok/][Eric Timmons]] and the [[https://mers.csail.mit.edu/][MIT MERS Group]] (i.e., this is not an official ECL image)
   + Supported architectures :: =linux/amd64=, =linux/arm64=, =linux/arm/v7=
-  + Previously known as :: =daewok/ecl=
 
 * What is ECL?
 
@@ -39,10 +35,6 @@
 
   This image contains ECL binaries built from the latest source releases from
   the ECL devs for a variety of OSes and architectures.
-
-  The general policy for OS support is that images will be built for two
-  versions of supported OSes: either the two most recent versions or the latest
-  LTS and most recent version, as applicable.
 
 * License
 
