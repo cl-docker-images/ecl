@@ -1,0 +1,22 @@
+FROM TEMPLATE
+
+ENV ECL_COMMIT PLACEHOLDER
+
+WORKDIR /usr/local/src/
+
+# hadolint ignore=DL3003,DL3008,DL4006
+RUN set -x \
+    && curl -L https://gitlab.com/embeddable-common-lisp/ecl/-/archive/$ECL_COMMIT/ecl-$ECL_COMMIT.tar.gz > ecl-${ECL_COMMIT}.tgz \
+    && gunzip ecl-${ECL_COMMIT}.tgz \
+    && tar xf ecl-${ECL_COMMIT}.tar \
+    && (cd ecl-${ECL_COMMIT} && ./configure --disable-manual && make -j $(nproc) && make install) \
+    && rm -rf ecl-${ECL_COMMIT}.tar ecl-${ECL_COMMIT} \
+    && ecl --version
+
+WORKDIR /
+
+COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+
+ENTRYPOINT ["docker-entrypoint.sh"]
+
+CMD ["ecl"]

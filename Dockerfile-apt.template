@@ -1,0 +1,24 @@
+FROM TEMPLATE
+
+ENV ECL_VERSION TEMPLATE
+ENV ECL_SHA512 TEMPLATE
+
+WORKDIR /usr/local/src/
+
+# hadolint ignore=DL3003,DL3008,DL4006
+RUN set -x \
+    && curl -L https://common-lisp.net/project/ecl/static/files/release/ecl-${ECL_VERSION}.tgz > ecl-${ECL_VERSION}.tgz \
+    && echo "$ECL_SHA512  ecl-20.4.24.tgz" | sha512sum -c \
+    && gunzip ecl-${ECL_VERSION}.tgz \
+    && tar xf ecl-${ECL_VERSION}.tar \
+    && (cd ecl-${ECL_VERSION} && ./configure --disable-manual && make -j $(nproc) && make install) \
+    && rm -rf ecl-${ECL_VERSION}.tar ecl-${ECL_VERSION} \
+    && ecl --version
+
+WORKDIR /
+
+COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+
+ENTRYPOINT ["docker-entrypoint.sh"]
+
+CMD ["ecl"]
