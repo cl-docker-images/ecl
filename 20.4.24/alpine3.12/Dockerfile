@@ -12,13 +12,17 @@ WORKDIR /usr/local/src/
 
 # hadolint ignore=DL3003,DL3018,DL4006
 RUN set -x \
+    && case "$(cat /etc/apk/arch)" in \
+    # Needed when building 32 bit arm on 64-bit host.
+    armv7) export build="--build=arm-linux-gnueabihf";; \
+    esac \
     && apk add --no-cache ca-certificates curl openssl make gcc musl-dev linux-headers \
                           gmp-dev libffi-dev \
     && curl -L https://common-lisp.net/project/ecl/static/files/release/ecl-${ECL_VERSION}.tgz > ecl-${ECL_VERSION}.tgz \
     && echo "$ECL_SHA512  ecl-20.4.24.tgz" | sha512sum -c \
     && gunzip ecl-${ECL_VERSION}.tgz \
     && tar xf ecl-${ECL_VERSION}.tar \
-    && (cd ecl-${ECL_VERSION} && ./configure --disable-manual && make && make install) \
+    && (cd ecl-${ECL_VERSION} && ./configure --disable-manual $build && make -j $(nproc) && make install) \
     && rm -rf ecl-${ECL_VERSION}.tar ecl-${ECL_VERSION} \
     && apk del --no-cache ca-certificates curl openssl make
 

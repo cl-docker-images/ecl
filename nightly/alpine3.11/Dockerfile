@@ -5,21 +5,23 @@
 #
 FROM alpine:3.11
 
-ENV ECL_VERSION TEMPLATE
-ENV ECL_SHA512 TEMPLATE
+ENV ECL_COMMIT 6ff3b2b86b4bfff6af3be04da0c84563a55a595d
 
 WORKDIR /usr/local/src/
 
 # hadolint ignore=DL3003,DL3018,DL4006
 RUN set -x \
+    && case "$(cat /etc/apk/arch)" in \
+    # Needed when building 32 bit arm on 64-bit host.
+    armv7) export build="--build=arm-linux-gnueabihf";; \
+    esac \
     && apk add --no-cache ca-certificates curl openssl make gcc musl-dev linux-headers \
                           gmp-dev libffi-dev \
-    && curl -L https://common-lisp.net/project/ecl/static/files/release/ecl-${ECL_VERSION}.tgz > ecl-${ECL_VERSION}.tgz \
-    && echo "$ECL_SHA512  ecl-20.4.24.tgz" | sha512sum -c \
-    && gunzip ecl-${ECL_VERSION}.tgz \
-    && tar xf ecl-${ECL_VERSION}.tar \
-    && (cd ecl-${ECL_VERSION} && ./configure --disable-manual && make -j $(nproc) && make install) \
-    && rm -rf ecl-${ECL_VERSION}.tar ecl-${ECL_VERSION} \
+    && curl -L https://gitlab.com/embeddable-common-lisp/ecl/-/archive/$ECL_COMMIT/ecl-$ECL_COMMIT.tar.gz > ecl-${ECL_COMMIT}.tgz \
+    && gunzip ecl-${ECL_COMMIT}.tgz \
+    && tar xf ecl-${ECL_COMMIT}.tar \
+    && (cd ecl-${ECL_COMMIT} && ./configure --disable-manual $build && make -j $(nproc) && make install) \
+    && rm -rf ecl-${ECL_COMMIT}.tar ecl-${ECL_COMMIT} \
     && apk del --no-cache ca-certificates curl openssl make
 
 WORKDIR /
