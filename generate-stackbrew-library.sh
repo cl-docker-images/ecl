@@ -12,11 +12,11 @@ cd "$(dirname "$(readlink -f "$BASH_SOURCE")")"
 
 if [ "${1-unset}" = "nightly" ]; then
     versions=( nightly )
-    aliases[nightly]="$(grep -e "^ENV SBCL_COMMIT" nightly/buster/Dockerfile | cut -d" " -f 3 | head -c 7)"
+    aliases[nightly]="$(grep -e "^ENV ECL_COMMIT" nightly/buster/Dockerfile | cut -d" " -f 3 | head -c 7)"
 elif [ "${1-unset}" = "all" ]; then
     versions=( */ )
     versions=( "${versions[@]%/}" )
-    aliases[nightly]="$(grep -e "^ENV SBCL_COMMIT" nightly/buster/Dockerfile | cut -d" " -f 3 | head -c 7)"
+    aliases[nightly]="$(grep -e "^ENV ECL_COMMIT" nightly/buster/Dockerfile | cut -d" " -f 3 | head -c 7)"
 else
     versions=( */ )
     versions=( "${versions[@]%/}" )
@@ -139,7 +139,6 @@ for version in "${versions[@]}"; do
         fi
 
         sharedTags=( "${sharedTags[@]//latest-/}" )
-        parentRepoToArches["daewok/sbcl:${variantAliases[0]}"]="${variantArches[*]}"
 
         echo
         echo "Tags: $(join ', ' "${variantAliases[@]}")"
