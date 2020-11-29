@@ -20,8 +20,9 @@ RUN set -x \
     && echo "$ECL_SHA512  ecl-20.4.24.tgz" | sha512sum -c \
     && gunzip ecl-${ECL_VERSION}.tgz \
     && tar xf ecl-${ECL_VERSION}.tar \
-    && (cd ecl-${ECL_VERSION} && ./configure --disable-manual $build && make -j $(nproc) && make install) \
-    && rm -rf ecl-${ECL_VERSION}.tar ecl-${ECL_VERSION} \
+    && mv ecl-${ECL_VERSION} ecl \
+    && (cd ecl && ./configure --disable-manual $build && make -j $(nproc) && make install && make clean ) \
+    && rm -rf ecl-${ECL_VERSION}.tar \
     && ecl --version
 
 WORKDIR /

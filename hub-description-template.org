@@ -92,7 +92,10 @@
    This is the defacto image. If you are unsure about what your needs are, you
    probably want to use this one. It is designed to be used both as a throw
    away container (mount your source code and start the container to start your
-   app), as well as the base to build other images off of.
+   app), as well as the base to build other images off of. Additionally, these
+   images contain the ECL source code (at =/usr/local/src/ecl=) to help
+   facilitate interactive development and exploration (a hallmark of Common
+   Lisp!).
 
    Some of these tags may have names like buster or stretch in them. These are
    the suite code names for releases of Debian and indicate which release the

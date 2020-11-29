@@ -13,8 +13,9 @@ RUN set -x \
     && curl -L https://gitlab.com/embeddable-common-lisp/ecl/-/archive/$ECL_COMMIT/ecl-$ECL_COMMIT.tar.gz > ecl-${ECL_COMMIT}.tgz \
     && gunzip ecl-${ECL_COMMIT}.tgz \
     && tar xf ecl-${ECL_COMMIT}.tar \
-    && (cd ecl-${ECL_COMMIT} && ./configure --disable-manual $build && make -j $(nproc) && make install) \
-    && rm -rf ecl-${ECL_COMMIT}.tar ecl-${ECL_COMMIT} \
+    && mv ecl-$ECL_COMMIT ecl \
+    && (cd ecl && ./configure --disable-manual $build && make -j $(nproc) && make install && make clean ) \
+    && rm -rf ecl-${ECL_COMMIT}.tar \
     && ecl --version
 
 WORKDIR /
