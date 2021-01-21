@@ -30,8 +30,8 @@ for version in "${versions[@]}"; do
     for v in \
         buster/{,slim} \
         stretch/{,slim} \
+        alpine3.13/ \
         alpine3.12/ \
-        alpine3.11/ \
     ; do
         os="${v%%/*}"
         variant="${v#*/}"
