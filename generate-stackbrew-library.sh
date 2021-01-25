@@ -150,6 +150,8 @@ for version in "${versions[@]}"; do
 			GitCommit: $commit
 			Directory: $dir
 		EOE
-        [[ "$os" == "windows"* ]] && echo "Constraints: $os"
+        if [[ "$os" == "windows"* ]]; then
+            echo "Constraints: $os"
+        fi
     done
 done
