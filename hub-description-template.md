@@ -1,52 +1,52 @@
-- [Supported Tags](#orgc84b322)
-  - [Simple Tags](#org437ab44)
-  - [Shared Tags](#org8ac9073)
-- [Quick Reference](#org7b197a4)
-- [What is ECL?](#org77f1ee8)
-- [How to use this iamge](#orgf38b96e)
-  - [Create a `Dockerfile` in your ECL project](#orge931df3)
-  - [Run a single Common Lisp script](#org4b47cba)
-  - [Developing using SLIME](#org73328fc)
-- [What's in the image?](#org38fc686)
-- [Image variants](#org6d7ea22)
-  - [`%%IMAGE%%:<version>`](#org7191ecb)
-  - [`%%IMAGE%%:<version>-slim`](#org3da4001)
-  - [`%%IMAGE%%:<version>-alpine`](#org824a07a)
-- [License](#org47321bd)
+- [Supported Tags](#orgcf717a6)
+  - [Simple Tags](#org236d392)
+  - [Shared Tags](#org912eae9)
+- [Quick Reference](#org39da2ad)
+- [What is ECL?](#org71ed18e)
+- [How to use this iamge](#org1bbcea9)
+  - [Create a `Dockerfile` in your ECL project](#orgc29b757)
+  - [Run a single Common Lisp script](#orgfca1b0c)
+  - [Developing using SLIME](#org94d59e0)
+- [What's in the image?](#org96038fa)
+- [Image variants](#org371ed62)
+  - [`%%IMAGE%%:<version>`](#org23e04af)
+  - [`%%IMAGE%%:<version>-slim`](#org9b2dbff)
+  - [`%%IMAGE%%:<version>-alpine`](#org8dd289b)
+- [License](#orgc1967c3)
 
 
 
-<a id="orgc84b322"></a>
+<a id="orgcf717a6"></a>
 
 # Supported Tags
 
 
-<a id="org437ab44"></a>
+<a id="org236d392"></a>
 
 ## Simple Tags
 
 INSERT-SIMPLE-TAGS
 
 
-<a id="org8ac9073"></a>
+<a id="org912eae9"></a>
 
 ## Shared Tags
 
 INSERT-SHARED-TAGS
 
 
-<a id="org7b197a4"></a>
+<a id="org39da2ad"></a>
 
 # Quick Reference
 
 -   **ECL Home Page:** <https://common-lisp.net/project/ecl/>
 -   **Where to file Docker image related issues:** <https://gitlab.common-lisp.net/cl-docker-images/ecl>
 -   **Where to file issues for ECL itself:** <https://gitlab.com/embeddable-common-lisp/ecl>
--   **Maintained by:** [Eric Timmons](https://github.com/daewok/)
+-   **Maintained by:** [CL Docker Images Project](https://common-lisp.net/project/cl-docker-images)
 -   **Supported architectures:** `linux/amd64`, `linux/arm64`, `linux/arm/v7`
 
 
-<a id="org77f1ee8"></a>
+<a id="org71ed18e"></a>
 
 # What is ECL?
 
@@ -57,12 +57,12 @@ From [ECL's Home Page](https://common-lisp.net/project/ecl/main.html):
 > ECL supports the operating systems Linux, FreeBSD, NetBSD, OpenBSD, OS X, Solaris, Windows, iOS and Android, running on top of the Intel, Sparc, Alpha, PowerPC and ARM processors.
 
 
-<a id="orgf38b96e"></a>
+<a id="org1bbcea9"></a>
 
 # How to use this iamge
 
 
-<a id="orge931df3"></a>
+<a id="orgc29b757"></a>
 
 ## Create a `Dockerfile` in your ECL project
 
@@ -81,7 +81,7 @@ $ docker run -it --rm --name my-running-app my-ecl-app
 ```
 
 
-<a id="org4b47cba"></a>
+<a id="orgfca1b0c"></a>
 
 ## Run a single Common Lisp script
 
@@ -92,7 +92,7 @@ $ docker run -it --rm --name my-running-script -v "$PWD":/usr/src/app -w /usr/sr
 ```
 
 
-<a id="org73328fc"></a>
+<a id="org94d59e0"></a>
 
 ## Developing using SLIME
 
@@ -109,21 +109,21 @@ M-x slime-connect RET RET RET
 ```
 
 
-<a id="org38fc686"></a>
+<a id="org96038fa"></a>
 
 # What's in the image?
 
 This image contains ECL binaries built from the latest source releases from the ECL devs for a variety of OSes and architectures.
 
 
-<a id="org6d7ea22"></a>
+<a id="org371ed62"></a>
 
 # Image variants
 
 This image comes in several variants, each designed for a specific use case.
 
 
-<a id="org7191ecb"></a>
+<a id="org23e04af"></a>
 
 ## `%%IMAGE%%:<version>`
 
@@ -136,14 +136,14 @@ These images are built off the buildpack-deps image. It, by design, has a large 
 These images contain the Quicklisp installer, located at `/usr/local/share/common-lisp/source/quicklisp/quicklisp.lisp`.
 
 
-<a id="org3da4001"></a>
+<a id="org9b2dbff"></a>
 
 ## `%%IMAGE%%:<version>-slim`
 
 This image does not contain the common packages contained in the default tag and only contains the minimal packages needed to run ECL. Unless you are working in an environment where only this image will be deployed and you have space constraints, we highly recommend using the default image of this repository.
 
 
-<a id="org824a07a"></a>
+<a id="org8dd289b"></a>
 
 ## `%%IMAGE%%:<version>-alpine`
 
@@ -154,7 +154,7 @@ This variant is highly recommended when final image size being as small as possi
 To minimize image size, it's uncommon for additional related tools (such as git or bash) to be included in Alpine-based images. Using this image as a base, add the things you need in your own Dockerfile (see the [alpine image description](https://hub.docker.com/_/alpine/) for examples of how to install packages if you are unfamiliar).
 
 
-<a id="org47321bd"></a>
+<a id="orgc1967c3"></a>
 
 # License
 
