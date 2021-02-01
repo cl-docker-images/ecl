@@ -12,7 +12,7 @@ RUN set -x \
     armhf) export build="--build=arm-linux-gnueabihf";; \
     esac \
     && curl -L https://common-lisp.net/project/ecl/static/files/release/ecl-${ECL_VERSION}.tgz > ecl-${ECL_VERSION}.tgz \
-    && echo "$ECL_SHA512  ecl-20.4.24.tgz" | sha512sum -c \
+    && echo "$ECL_SHA512  ecl-${ECL_VERSION}.tgz" | sha512sum -c \
     && gunzip ecl-${ECL_VERSION}.tgz \
     && tar xf ecl-${ECL_VERSION}.tar \
     && mv ecl-${ECL_VERSION} ecl \

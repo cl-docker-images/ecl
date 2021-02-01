@@ -3,10 +3,10 @@
 #
 # PLEASE DO NOT EDIT IT DIRECTLY.
 #
-FROM buildpack-deps:buster
+FROM buildpack-deps:stretch
 
-ENV ECL_VERSION 20.4.24
-ENV ECL_SHA512 4c127e0d6a99e38f3a926135ae92d92899058c5a5e99b90f28d4a47b58d94ee89a958cfb4bfd2b9e6ad7b3c57867cd13119b2a4dd6bb1aa3bb5ec42a96bfa788
+ENV ECL_VERSION 21.2.1
+ENV ECL_SHA512 0849bebe1a8073ea8027cfb172c1d7781d43adb6a8b80585bd08d5674b80422d1648b6fbf718cc17a51c5de6c696514523b4d13a82e8113bf9365c95d3c28648
 
 WORKDIR /usr/local/src/
 
@@ -17,7 +17,7 @@ RUN set -x \
     armhf) export build="--build=arm-linux-gnueabihf";; \
     esac \
     && curl -L https://common-lisp.net/project/ecl/static/files/release/ecl-${ECL_VERSION}.tgz > ecl-${ECL_VERSION}.tgz \
-    && echo "$ECL_SHA512  ecl-20.4.24.tgz" | sha512sum -c \
+    && echo "$ECL_SHA512  ecl-${ECL_VERSION}.tgz" | sha512sum -c \
     && gunzip ecl-${ECL_VERSION}.tgz \
     && tar xf ecl-${ECL_VERSION}.tar \
     && mv ecl-${ECL_VERSION} ecl \
