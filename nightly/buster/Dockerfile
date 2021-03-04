@@ -5,7 +5,7 @@
 #
 FROM buildpack-deps:buster
 
-ENV ECL_COMMIT e74f2935f4bffa02f6c75af4e8858020e7405812
+ENV ECL_COMMIT 788b9b4cd0f3db77a15453ece0d05493703e96b3
 
 WORKDIR /usr/local/src/
 
