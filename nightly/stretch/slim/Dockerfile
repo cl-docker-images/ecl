@@ -5,7 +5,7 @@
 #
 FROM debian:stretch
 
-ENV ECL_COMMIT a7e1bf6c9f2a77fd47f63382a9d8372bc1a15e34
+ENV ECL_COMMIT 8428d6a35a384c91004d604bb6c59ac1ee7df714
 
 WORKDIR /usr/local/src/
 
