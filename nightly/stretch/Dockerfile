@@ -5,7 +5,7 @@
 #
 FROM buildpack-deps:stretch
 
-ENV ECL_COMMIT e466823ac6836bfb9b2a01c5d0f8f411aaddb03e
+ENV ECL_COMMIT 36a9c95c8079a47ce29c36bfb855d4f9aa52bd3b
 
 WORKDIR /usr/local/src/
 
