@@ -5,7 +5,7 @@
 #
 FROM alpine:3.12
 
-ENV ECL_COMMIT 36a9c95c8079a47ce29c36bfb855d4f9aa52bd3b
+ENV ECL_COMMIT b1ea49e1a0644a2e3ab881a6d44b15ace2548436
 
 WORKDIR /usr/local/src/
 
