@@ -5,12 +5,8 @@
 #
 FROM debian:bullseye
 
-<<<<<<< HEAD:nightly/buster/slim/Dockerfile
-ENV ECL_COMMIT ae6cd30e9e492fdef9983016c4d74f5752742f9d
-=======
 ENV ECL_VERSION 21.2.1
 ENV ECL_SHA512 0849bebe1a8073ea8027cfb172c1d7781d43adb6a8b80585bd08d5674b80422d1648b6fbf718cc17a51c5de6c696514523b4d13a82e8113bf9365c95d3c28648
->>>>>>> be45aff (Update base images):21.2.1/bullseye/slim/Dockerfile
 
 WORKDIR /usr/local/src/
 
