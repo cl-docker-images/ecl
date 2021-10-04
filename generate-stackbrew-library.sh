@@ -5,22 +5,21 @@ declare -A aliases=(
     [21.2.1]='latest'
 )
 
-defaultDebianSuite='buster'
+defaultDebianSuite='bullseye'
 
 self="$(basename "$BASH_SOURCE")"
 cd "$(dirname "$(readlink -f "$BASH_SOURCE")")"
 
-if [ "${1-unset}" = "nightly" ]; then
-    versions=( nightly )
-    aliases[nightly]="$(grep -e "^ENV ECL_COMMIT" nightly/buster/Dockerfile | cut -d" " -f 3 | head -c 7)"
+if [ "${1-unset}" = "rc" ]; then
+    versions=( *rc/ )
+    versions=( "${versions[@]%/}" )
 elif [ "${1-unset}" = "all" ]; then
     versions=( */ )
     versions=( "${versions[@]%/}" )
-    aliases[nightly]="$(grep -e "^ENV ECL_COMMIT" nightly/buster/Dockerfile | cut -d" " -f 3 | head -c 7)"
 else
     versions=( */ )
     versions=( "${versions[@]%/}" )
-    versions=( "${versions[@]/nightly}" )
+    versions=( "${versions[@]%%*rc}" )
 fi
 
 # sort version numbers with highest first
@@ -62,7 +61,16 @@ getArches() {
             | xargs bashbrew cat --format '[{{ .RepoName }}:{{ .TagName }}]="{{ join " " .TagEntry.Architectures }}"'
     ) )"
 }
-getArches 'ecl'
+# getArches 'ecl'
+
+declare -g -A parentRepoToArches=(
+    [alpine:3.13]="amd64 arm32v6 arm32v7 arm64v8 i386 ppc64le s390x"
+    [alpine:3.14]="amd64 arm32v6 arm32v7 arm64v8 i386 ppc64le s390x"
+    [buildpack-deps:bullseye]="amd64 arm32v6 arm32v7 arm64v8 i386 ppc64le s390x"
+    [buildpack-deps:buster]="amd64 arm32v6 arm32v7 arm64v8 i386 ppc64le s390x"
+    [debian:bullseye]="amd64 arm32v6 arm32v7 arm64v8 i386 ppc64le s390x"
+    [debian:buster]="amd64 arm32v6 arm32v7 arm64v8 i386 ppc64le s390x"
+)
 
 cat <<-EOH
 # this file is generated via https://github.com/cl-docker-images/ecl/blob/$(fileCommit "$self")/$self
@@ -80,10 +88,10 @@ join() {
 for version in "${versions[@]}"; do
 
     for v in \
+        bullseye/{,slim} \
         buster/{,slim} \
-        stretch/{,slim} \
+        alpine3.14/ \
         alpine3.13/ \
-        alpine3.12/ \
     ; do
         os="${v%%/*}"
         variant="${v#*/}"
@@ -95,10 +103,7 @@ for version in "${versions[@]}"; do
 
         dir="$version/$v"
 
-        if [ "$version" = "nightly" ] && [[ "$os" == "windowsservercore"* ]]; then
-            continue
-        elif [ "$version" = "2.0.10" ] && [ "$os" = "stretch" ]; then
-            # AMD64 does not compile without patches
+        if [[ "$version" == *rc ]] && [[ "$os" == "windowsservercore"* ]]; then
             continue
         fi
 

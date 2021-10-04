@@ -3,6 +3,10 @@ set -Eeuo pipefail
 
 cd "$(dirname "$(readlink -f "$BASH_SOURCE")")"
 
+declare -A refs=(
+    [22.0.0-rc]='develop'
+)
+
 versions=( "$@" )
 
 generated_warning() {
@@ -17,8 +21,8 @@ EOH
 
 for version in "${versions[@]}"; do
 
-    if [ "$version" = "nightly" ]; then
-        eclGitSha="$(curl -fsSL https://gitlab.com/api/v4/projects/embeddable-common-lisp%2Fecl/repository/branches/develop | jq -r .commit.id)"
+    if [[ $version == *rc ]]; then
+        eclGitSha="$(curl -fsSL "https://gitlab.com/api/v4/projects/embeddable-common-lisp%2Fecl/repository/branches/${refs[$version]}" | jq -r .commit.id)"
         unset sbclSourceUrl
         unset sbclSourceSha
     else
@@ -28,23 +32,23 @@ for version in "${versions[@]}"; do
     fi
 
     for v in \
+        bullseye/{,slim} \
         buster/{,slim} \
-        stretch/{,slim} \
+        alpine3.14/ \
         alpine3.13/ \
-        alpine3.12/ \
     ; do
         os="${v%%/*}"
         variant="${v#*/}"
         dir="$version/$v"
 
-        if [ "$version" = "nightly" ] && [[ "$os" == "windowsservercore"* ]]; then
+        if [[ $version == *rc ]] && [[ "$os" == "windowsservercore"* ]]; then
             continue
         fi
 
         mkdir -p "$dir"
 
         case "$os" in
-            buster|stretch)
+            bullseye|buster|stretch)
                 template="apt"
                 if [ "$variant" = "slim" ]; then
                     from="debian:$os"
@@ -69,7 +73,7 @@ for version in "${versions[@]}"; do
             template="$template-$variant"
         fi
 
-        if [ "$version" = "nightly" ]; then
+        if [[ $version == *rc ]]; then
             template="$template-nightly"
         fi
 
@@ -77,7 +81,7 @@ for version in "${versions[@]}"; do
 
         { generated_warning; cat "$template"; } > "$dir/Dockerfile"
 
-        if [ "$version" = "nightly" ]; then
+        if [[ $version == *rc ]]; then
             sed -ri \
                 -e 's,^(FROM) .*,\1 '"$from"',' \
                 -e 's/^(ENV ECL_COMMIT) .*/\1 '"$eclGitSha"'/' \
